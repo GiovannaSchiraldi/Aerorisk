@@ -1,4 +1,4 @@
-# AeroRisk 🚀
+# AeroRisk
 A web-based Probabilistic Risk Assessment (PRA) platform for aerospace engineers and mission planners to model, analyze, and visualize system failure scenarios.
 
 ## Team
@@ -17,7 +17,7 @@ A web-based Probabilistic Risk Assessment (PRA) platform for aerospace engineers
 - Database: PostgreSQL
 
 ## Project Status
-🟡 In Progress — Week 1
+In Progress — Week 1
 
 ## How to Run
 Coming soon.
