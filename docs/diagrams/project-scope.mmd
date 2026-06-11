@@ -1,0 +1,114 @@
+---
+title: AeroRisk — Project Scope (UML Use-Case Diagram)
+config:
+  theme: base
+  themeVariables:
+    fontSize: "14px"
+    primaryColor: "#F5F8FF"
+    primaryBorderColor: "#1F6FEB"
+    primaryTextColor: "#0B1F44"
+    lineColor: "#475569"
+    clusterBkg: "#FAFBFD"
+    clusterBorder: "#94A3B8"
+---
+flowchart LR
+%% =========================================================
+%%  AeroRisk — Probabilistic Risk Assessment Platform
+%%  Deliverable 1 — Use-Case Diagram (UML)
+%%  Highlighted (gold) = use cases owned by the author:
+%%      UC-02  Log Out
+%%      UC-03  Update Profile
+%%      UC-08  Export PDF Report
+%%  All other UCs are shown so the full team contribution
+%%  and project scope are visible in one picture.
+%% =========================================================
+
+    Engineer(("Engineer")):::actor
+    Admin(("Admin")):::actor
+
+    Admin -. "generalizes" .-> Engineer
+
+    subgraph AeroRisk["AeroRisk  —  PRA Web Platform  (System Boundary)"]
+        direction TB
+
+        subgraph Auth["Authentication and Account Management"]
+            direction TB
+            UC01(["UC-01
+            Log In
+            (owner: Rodrigo — Backend)"]):::team
+            UC02(["UC-02
+            Log Out
+            (owner: Giovanna — Testing and Docs)"]):::mine
+            UC03(["UC-03
+            Update Profile
+            (owner: Rodrigo — Backend)"]):::mine
+        end
+
+        subgraph Modeling["Project Creation and Fault-Tree Modeling"]
+            direction TB
+            UC04(["UC-04
+            Create Project
+            (owner: Uriel — Frontend)"]):::team
+            UC09(["UC-09
+            Load NASA Template
+            (owner: Giovanna — Testing and Docs)"]):::team
+            UC05(["UC-05
+            Build Fault Tree
+            (owners: Uriel — Frontend  and  Jada — Fault-Tree Engine)"]):::team
+        end
+
+        subgraph Analysis["Risk Simulation and Reporting"]
+            direction TB
+            UC06(["UC-06
+            Run Simulation
+            (owner: Daniel — Monte Carlo)"]):::team
+            UC07(["UC-07
+            View Results
+            (owners: Daniel — Monte Carlo  and  Luna — Integration)"]):::team
+            UC08(["UC-08
+            Export PDF Report
+            (owner: Luna — Integration)"]):::mine
+        end
+
+        subgraph AdminBlock["System Administration"]
+            direction TB
+            UC10(["UC-10
+            Manage Users
+            (owner: Luna — Integration)"]):::team
+        end
+    end
+
+    %% ---------- Actor associations ----------
+    Engineer --- UC01
+    Engineer --- UC02
+    Engineer --- UC03
+    Engineer --- UC04
+    Engineer --- UC05
+    Engineer --- UC06
+    Engineer --- UC07
+    Engineer --- UC08
+    Engineer --- UC09
+    Admin    --- UC10
+
+    %% ---------- UML relationships between use cases ----------
+    UC04 -. "«include»" .-> UC09
+    UC06 -. "«include»" .-> UC05
+    UC07 -. "«include»" .-> UC06
+    UC08 -. "«extend»"  .-> UC07
+    UC02 -. "«related»" .-> UC01
+    UC03 -. "«related»" .-> UC10
+
+    %% ---------- Legend ----------
+    subgraph Legend[" Legend "]
+        direction LR
+        L1[/"Highlighted = author's use cases (UC-02, UC-03, UC-08)"/]:::mine
+        L2[/"Team-owned use case (other group members)"/]:::team
+        L3(("Actor")):::actor
+        L4[/"«include» = required sub-behavior     «extend» = optional sub-behavior"/]:::note
+    end
+
+    %% ---------- Styling ----------
+    classDef mine   fill:#FFE27A,stroke:#B8860B,stroke-width:3px,color:#1A1A1A;
+    classDef team   fill:#E8F0FE,stroke:#1F6FEB,stroke-width:1.5px,color:#0B1F44;
+    classDef actor  fill:#CFE8FF,stroke:#1F6FEB,stroke-width:2px,color:#0B1F44;
+    classDef note   fill:#F8FAFC,stroke:#94A3B8,stroke-width:1px,color:#334155,font-style:italic;
