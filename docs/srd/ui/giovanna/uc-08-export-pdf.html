@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroRisk · UC-08 Export PDF Report — UI Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="logo">▲</span> Aero<span class="tag">Risk</span></div>
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Projects</a>
+      <a href="#">Templates</a>
+      <a href="#" class="active">Results</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-chip"><span class="avatar">GS</span> g.schiraldi@fiu.edu</div>
+      <button class="btn btn-ghost btn-sm">⎋ Log Out</button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="crumbs"><b>AeroRisk</b> › Projects › Mars Lander EDL › Results › UC-08</div>
+    <h1 class="h1">UC-08 — Export PDF Report</h1>
+    <p class="sub">As an engineer I want to export a PDF report of my analysis so that I can share my risk assessment findings in a professional format.</p>
+
+    <div class="states">
+      <button class="seg" data-show="pdf" data-target="results">1 · Results view</button>
+      <button class="seg" data-show="pdf" data-target="generating">2 · Generating</button>
+      <button class="seg" data-show="pdf" data-target="download">3 · Download prompt</button>
+      <button class="seg" data-show="pdf" data-target="preview">PDF preview</button>
+      <button class="seg" data-show="pdf" data-target="errors">Exceptions</button>
+    </div>
+
+    <!-- ================= STATE: results view (entry point) ================= -->
+    <section data-screen="pdf" data-name="results">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Results — Mars Lander EDL <span class="badge badge-nasa" style="margin-left:8px;">NASA MISSION TEMPLATE</span></h2>
+            <div class="desc">Owner: G. Schiraldi · Created 06/04/2026 · Simulation complete</div>
+          </div>
+          <button class="btn btn-primary" data-show="pdf" data-target="generating">⬇ Export PDF</button>
+        </div>
+        <div class="card-pad">
+          <div class="metric-grid">
+            <div class="metric"><div class="k">Top-level failure prob.</div><div class="v warn">3.82e-3</div><div class="s">P(loss of mission)</div></div>
+            <div class="metric"><div class="k">95% confidence bounds</div><div class="v">2.9–4.8e-3</div><div class="s">Monte Carlo, 1,000,000 trials</div></div>
+            <div class="metric"><div class="k">Minimal cut sets</div><div class="v">12</div><div class="s">3 dominant (&gt;60% contribution)</div></div>
+          </div>
+
+          <div class="grid-2" style="margin-top:18px;">
+            <div class="card" style="background:var(--navy-900);">
+              <div class="card-head"><div><h2 style="font-size:14px;">Minimal cut sets</h2></div></div>
+              <div class="card-pad" style="padding:6px 8px;">
+                <table class="cut-sets">
+                  <thead><tr><th>#</th><th>Cut set</th><th>Contribution</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td class="mono">{ Parachute_Fail }</td><td>34.1%</td></tr>
+                    <tr><td>2</td><td class="mono">{ Radar_Alt · Thruster_B }</td><td>18.7%</td></tr>
+                    <tr><td>3</td><td class="mono">{ IMU_Drift · SW_Fault }</td><td>9.4%</td></tr>
+                    <tr><td>4</td><td class="mono">{ Heatshield_Crack }</td><td>6.2%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card" style="background:var(--navy-900);">
+              <div class="card-head"><div><h2 style="font-size:14px;">Monte Carlo distribution</h2></div></div>
+              <div class="card-pad">
+                <div class="histogram">
+                  <div class="bar" style="height:14%"></div>
+                  <div class="bar" style="height:28%"></div>
+                  <div class="bar" style="height:46%"></div>
+                  <div class="bar" style="height:70%"></div>
+                  <div class="bar peak" style="height:96%"></div>
+                  <div class="bar peak" style="height:88%"></div>
+                  <div class="bar" style="height:62%"></div>
+                  <div class="bar" style="height:40%"></div>
+                  <div class="bar" style="height:24%"></div>
+                  <div class="bar" style="height:12%"></div>
+                </div>
+                <div class="row" style="justify-content:space-between;margin-top:8px;"><span class="muted" style="font-size:11px;">2.5e-3</span><span class="muted" style="font-size:11px;">P(failure)</span><span class="muted" style="font-size:11px;">5.0e-3</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: generating ================= -->
+    <section data-screen="pdf" data-name="generating">
+      <div class="card card-pad" style="text-align:center;padding:60px 26px;">
+        <div class="modal-ic" style="background:rgba(79,140,255,.12);color:var(--accent);border-color:rgba(79,140,255,.3);margin-bottom:18px;">⬇</div>
+        <h2 style="margin:0 0 8px;font-size:18px;">Generating PDF report…</h2>
+        <p class="muted" style="font-size:14px;max-width:420px;margin:0 auto 20px;">Retrieving project metadata, fault tree model, and simulation results · rendering Monte Carlo histogram.</p>
+        <div class="meter" style="max-width:320px;margin:0 auto;height:8px;"><span style="width:68%;background:linear-gradient(90deg,var(--accent),var(--accent-2));"></span></div>
+        <div class="spacer-20"></div>
+        <button class="btn btn-ghost btn-sm" data-show="pdf" data-target="download">Continue →</button>
+      </div>
+    </section>
+
+    <!-- ================= STATE: browser download prompt ================= -->
+    <section data-screen="pdf" data-name="download">
+      <div class="card card-pad" style="filter:brightness(.65);pointer-events:none;">
+        <div class="card-head" style="padding:0 0 14px;"><div><h2>Results — Mars Lander EDL</h2></div></div>
+        <div class="metric-grid">
+          <div class="metric"><div class="k">Top-level failure prob.</div><div class="v warn">3.82e-3</div></div>
+          <div class="metric"><div class="k">Confidence</div><div class="v">2.9–4.8e-3</div></div>
+          <div class="metric"><div class="k">Cut sets</div><div class="v">12</div></div>
+        </div>
+      </div>
+      <div class="modal-backdrop">
+        <div class="modal" style="max-width:480px;text-align:left;">
+          <div class="row" style="gap:14px;">
+            <div class="modal-ic" style="margin:0;background:#3a1620;color:var(--danger);">PDF</div>
+            <div>
+              <h3 style="margin:0;font-size:16px;">Save file</h3>
+              <p style="margin:2px 0 0;font-size:13px;">Your browser is downloading the report.</p>
+            </div>
+          </div>
+          <div class="spacer-20"></div>
+          <div class="metric" style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:22px;">📄</span>
+            <div class="flex-1">
+              <div style="font-weight:700;font-size:14px;">AeroRisk_MarsLanderEDL_Report.pdf</div>
+              <div class="muted" style="font-size:12px;">PDF document · 2.3 MB</div>
+            </div>
+          </div>
+          <div class="spacer-20"></div>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" data-show="pdf" data-target="results">Cancel</button>
+            <button class="btn btn-primary" data-show="pdf" data-target="preview">Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: rendered PDF preview ================= -->
+    <section data-screen="pdf" data-name="preview">
+      <div class="toast toast-ok" style="margin-bottom:18px;">
+        <span class="ic">✓</span> Report downloaded · export logged in the project audit trail.
+      </div>
+      <div class="pdf-doc">
+        <div class="pdf-head">
+          <div>
+            <div class="pdf-brand"><span class="logo">▲</span> AeroRisk</div>
+            <h1 style="margin-top:8px;">Risk Assessment Report</h1>
+            <div style="color:#41506b;">Mars Lander EDL</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="pdf-nasa">NASA MISSION CONTEXT</div>
+            <div style="color:#8090ab;font-size:10.5px;margin-top:8px;">Generated 06/15/2026</div>
+          </div>
+        </div>
+
+        <h2>Project Summary</h2>
+        <div class="meta-row">
+          <span><b>Project:</b> Mars Lander EDL</span>
+          <span><b>Owner:</b> Giovanna Schiraldi</span>
+          <span><b>Created:</b> 06/04/2026</span>
+          <span><b>Template:</b> NASA EDL Reference</span>
+        </div>
+
+        <h2>Fault Tree Summary</h2>
+        <table>
+          <tr><th>Top event</th><th>Gates</th><th>Basic events</th><th>Minimal cut sets</th></tr>
+          <tr><td>Loss of Mission (EDL)</td><td>9 (5 AND / 4 OR)</td><td>23</td><td>12</td></tr>
+        </table>
+
+        <h2>Quantitative Results</h2>
+        <table>
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Top-level failure probability</td><td>3.82 × 10⁻³</td></tr>
+          <tr><td>95% confidence bounds</td><td>2.9 × 10⁻³ – 4.8 × 10⁻³</td></tr>
+          <tr><td>Monte Carlo trials</td><td>1,000,000</td></tr>
+        </table>
+
+        <h2>Dominant Minimal Cut Sets</h2>
+        <table>
+          <tr><th>#</th><th>Cut set</th><th>Contribution</th></tr>
+          <tr><td>1</td><td>Parachute_Fail</td><td>34.1%</td></tr>
+          <tr><td>2</td><td>Radar_Alt · Thruster_B</td><td>18.7%</td></tr>
+          <tr><td>3</td><td>IMU_Drift · SW_Fault</td><td>9.4%</td></tr>
+        </table>
+
+        <h2>Monte Carlo Distribution</h2>
+        <div class="pdf-hist">
+          <div class="b" style="height:16%"></div><div class="b" style="height:30%"></div>
+          <div class="b" style="height:50%"></div><div class="b" style="height:72%"></div>
+          <div class="b" style="height:98%"></div><div class="b" style="height:90%"></div>
+          <div class="b" style="height:64%"></div><div class="b" style="height:42%"></div>
+          <div class="b" style="height:26%"></div><div class="b" style="height:13%"></div>
+        </div>
+
+        <div class="pdf-foot">
+          <span>AeroRisk · Probabilistic Risk Assessment Platform</span>
+          <span>Page 1 of 1 · Confidential</span>
+        </div>
+      </div>
+      <div class="row" style="justify-content:center;margin-top:18px;">
+        <button class="btn btn-ghost btn-sm" data-show="pdf" data-target="results">↻ Back to results</button>
+      </div>
+    </section>
+
+    <!-- ================= STATE: exceptions ================= -->
+    <section data-screen="pdf" data-name="errors">
+      <div class="card card-pad">
+        <h2 style="margin:0 0 14px;font-size:16px;">Exception paths</h2>
+        <div class="toast toast-err" style="margin-bottom:14px;">
+          <span class="ic">!</span> Report generation failed. Please try again.
+        </div>
+        <p class="muted" style="font-size:13px;margin:0 0 24px;">Shown when PDF generation fails due to a server error. The export is not recorded.</p>
+
+        <div class="toast toast-warn" style="margin-bottom:14px;">
+          <span class="ic">!</span> Cannot export — simulation results are incomplete. Please re-run the simulation.
+        </div>
+        <p class="muted" style="font-size:13px;margin:0 0 24px;">Shown when the simulation results data is incomplete. Export is blocked.</p>
+
+        <div class="mock-note" style="margin:0;">
+          <b>Cancel path:</b> if the user dismisses the browser download prompt, the file is discarded and <b>no export record is created</b> in the audit log.
+        </div>
+        <div class="spacer-20"></div>
+        <div class="row end"><button class="btn btn-ghost btn-sm" data-show="pdf" data-target="results">↻ Back to results</button></div>
+      </div>
+    </section>
+
+    <p class="mock-footer">AeroRisk · SRD Appendix B — UI Mockups · UC-08 Export PDF Report · Owner: G. Schiraldi (CEN4010)</p>
+  </main>
+
+  <script src="assets/mock.js"></script>
+</body>
+</html>

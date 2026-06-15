@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroRisk · UC-02 Log Out — UI Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <!-- ============ App shell / navigation bar ============ -->
+  <nav class="nav">
+    <div class="brand"><span class="logo">▲</span> Aero<span class="tag">Risk</span></div>
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Projects</a>
+      <a href="#">Templates</a>
+      <a href="#" class="active">Results</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-chip"><span class="avatar">GS</span> g.schiraldi@fiu.edu</div>
+      <!-- Logout entry point — visible from every page (NFR: usability) -->
+      <button class="btn btn-ghost btn-sm" data-show="logout" data-target="confirm">⎋ Log Out</button>
+    </div>
+  </nav>
+
+  <main class="page page-narrow">
+    <div class="crumbs"><b>AeroRisk</b> › Use Case Mockups › UC-02</div>
+    <h1 class="h1">UC-02 — Log Out</h1>
+    <p class="sub">As an engineer I want to log out of AeroRisk so that my session is securely terminated.</p>
+
+    <div class="mock-note">
+      <b>How to read this mockup:</b> use the steps below to walk through the flow.
+      The “Log Out” control above is the actor's entry point and is reachable from every page.
+    </div>
+
+    <!-- step switcher (mockup chrome) -->
+    <div class="states">
+      <button class="seg" data-show="logout" data-target="active">1 · Authenticated</button>
+      <button class="seg" data-show="logout" data-target="confirm">2 · Confirmation prompt</button>
+      <button class="seg" data-show="logout" data-target="done">3 · Logged out</button>
+      <button class="seg" data-show="logout" data-target="expired">Exception · Session expired</button>
+    </div>
+
+    <!-- ================= STATE: authenticated (any page) ================= -->
+    <section data-screen="logout" data-name="active">
+      <div class="card card-pad">
+        <span class="badge badge-ok">● Session active</span>
+        <div class="spacer-20"></div>
+        <h2 style="margin:0 0 6px;font-size:18px;">Results — Falcon Booster FT-09</h2>
+        <p class="muted" style="margin:0 0 18px;font-size:14px;">You are signed in. Click <b style="color:var(--ink-soft)">Log Out</b> in the top navigation bar to end your session securely.</p>
+        <div class="metric-grid">
+          <div class="metric"><div class="k">Top-level prob.</div><div class="v warn">2.41e-4</div></div>
+          <div class="metric"><div class="k">Confidence</div><div class="v ok">95%</div></div>
+          <div class="metric"><div class="k">Cut sets</div><div class="v">17</div></div>
+        </div>
+        <div class="spacer-20"></div>
+        <div class="row end"><button class="btn btn-ghost" data-show="logout" data-target="confirm">⎋ Log Out</button></div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: confirmation modal ================= -->
+    <section data-screen="logout" data-name="confirm">
+      <div class="card card-pad" style="filter:saturate(.8) brightness(.7);pointer-events:none;">
+        <span class="badge badge-ok">● Session active</span>
+        <div class="spacer-20"></div>
+        <h2 style="margin:0;font-size:18px;">Results — Falcon Booster FT-09</h2>
+      </div>
+      <div class="modal-backdrop">
+        <div class="modal">
+          <div class="modal-ic">⎋</div>
+          <h3>Are you sure you want to log out?</h3>
+          <p>Your session token will be invalidated and any unsaved view state will be cleared from this browser.</p>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" data-show="logout" data-target="active">Cancel</button>
+            <button class="btn btn-danger" data-show="logout" data-target="done">Yes, log out</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: logged out (login page + toast) ================= -->
+    <section data-screen="logout" data-name="done">
+      <div class="auth-wrap" style="min-height:auto;padding:10px 0 0;">
+        <div class="auth-card">
+          <div class="toast toast-ok" style="margin-bottom:22px;">
+            <span class="ic">✓</span> You have been logged out successfully.
+          </div>
+          <div class="card card-pad">
+            <div class="auth-logo">
+              <span class="logo">▲</span>
+              <h1>AeroRisk</h1>
+              <p>Probabilistic Risk Assessment Platform</p>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input class="input" type="email" placeholder="you@organization.edu" />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input class="input" type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn btn-primary btn-block">Log in</button>
+            <p class="muted" style="text-align:center;font-size:13px;margin:16px 0 0;">Session token invalidated · audit log updated · 100% server-side termination</p>
+          </div>
+          <div class="row" style="justify-content:center;margin-top:16px;">
+            <button class="btn btn-ghost btn-sm" data-show="logout" data-target="active">↻ Replay flow</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXCEPTION: already-expired session ================= -->
+    <section data-screen="logout" data-name="expired">
+      <div class="auth-wrap" style="min-height:auto;padding:10px 0 0;">
+        <div class="auth-card">
+          <div class="mock-note" style="margin-bottom:18px;">
+            <b>Exception path:</b> the session had already expired before the user clicked Log Out.
+            The system <b>silently</b> redirects to the login page with <b>no error shown</b> (per spec).
+          </div>
+          <div class="card card-pad">
+            <div class="auth-logo">
+              <span class="logo">▲</span>
+              <h1>AeroRisk</h1>
+              <p>Probabilistic Risk Assessment Platform</p>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input class="input" type="email" placeholder="you@organization.edu" />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input class="input" type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn btn-primary btn-block">Log in</button>
+          </div>
+          <div class="row" style="justify-content:center;margin-top:16px;">
+            <button class="btn btn-ghost btn-sm" data-show="logout" data-target="active">↻ Replay flow</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="mock-footer">AeroRisk · SRD Appendix B — UI Mockups · UC-02 Log Out · Owner: G. Schiraldi (CEN4010)</p>
+  </main>
+
+  <script src="assets/mock.js"></script>
+</body>
+</html>

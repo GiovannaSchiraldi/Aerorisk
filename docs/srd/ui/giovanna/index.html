@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroRisk · UI Mockups — Giovanna's Use Cases</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="logo">▲</span> Aero<span class="tag">Risk</span></div>
+    <div class="nav-right">
+      <span class="badge badge-accent">SRD Appendix B · UI Mockups</span>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="crumbs"><b>AeroRisk</b> › Deliverable 1 › UI Mockups</div>
+    <h1 class="h1">UI Mockups — Giovanna's Use Cases</h1>
+    <p class="sub">Static, browser-viewable mockups for the three use cases in <i>Giovanna_UseCases_Deliverable1</i>. Each page lets you step through the use-case flow including alternative and exception paths.</p>
+
+    <div class="grid-2" style="grid-template-columns:repeat(3,1fr);">
+      <a href="uc-02-logout.html" class="card card-pad" style="display:block;">
+        <span class="badge badge-accent">UC-02</span>
+        <h2 style="font-size:18px;margin:14px 0 6px;">Log Out</h2>
+        <p class="muted" style="font-size:13px;margin:0;">Confirmation prompt, secure session termination, success toast, and the silent expired-session exception.</p>
+      </a>
+      <a href="uc-03-update-profile.html" class="card card-pad" style="display:block;">
+        <span class="badge badge-accent">UC-03</span>
+        <h2 style="font-size:18px;margin:14px 0 6px;">Update Profile</h2>
+        <p class="muted" style="font-size:13px;margin:0;">Pre-filled edit form, inline validation, password strength meter, error states, and success.</p>
+      </a>
+      <a href="uc-08-export-pdf.html" class="card card-pad" style="display:block;">
+        <span class="badge badge-accent">UC-08</span>
+        <h2 style="font-size:18px;margin:14px 0 6px;">Export PDF Report</h2>
+        <p class="muted" style="font-size:13px;margin:0;">Results view, generation progress, browser download prompt, rendered PDF with NASA label, exceptions.</p>
+      </a>
+    </div>
+
+    <div class="spacer-20"></div>
+    <div class="mock-note">
+      <b>Tech note:</b> these are intentionally framework-free HTML/CSS so they render in any browser without a build step — ideal for the Deliverable 1 presentation and the SRD appendix. They follow the AeroRisk design language and can be ported 1:1 into the React frontend.
+    </div>
+
+    <p class="mock-footer">AeroRisk · CEN4010 (FIU) · Owner: Giovanna Schiraldi (P6 Testing &amp; Docs)</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroRisk · UC-03 Update Profile — UI Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="logo">▲</span> Aero<span class="tag">Risk</span></div>
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Projects</a>
+      <a href="#">Templates</a>
+      <a href="#">Results</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-chip"><span class="avatar">GS</span> g.schiraldi@fiu.edu</div>
+      <button class="btn btn-ghost btn-sm">⎋ Log Out</button>
+    </div>
+  </nav>
+
+  <main class="page page-narrow">
+    <div class="crumbs"><b>AeroRisk</b> › Account Settings › UC-03</div>
+    <h1 class="h1">UC-03 — Update Profile</h1>
+    <p class="sub">As an engineer I want to update my profile so that my account info reflects my current name, organization, and credentials.</p>
+
+    <div class="states">
+      <button class="seg" data-show="profile" data-target="view">1 · Account Settings</button>
+      <button class="seg" data-show="profile" data-target="edit">2 · Edit Profile</button>
+      <button class="seg" data-show="profile" data-target="errors">3 · Validation errors</button>
+      <button class="seg" data-show="profile" data-target="saved">4 · Saved</button>
+    </div>
+
+    <!-- ================= STATE: read-only account settings ================= -->
+    <section data-screen="profile" data-name="view">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Account Settings</h2>
+            <div class="desc">Your AeroRisk profile information.</div>
+          </div>
+          <button class="btn btn-primary btn-sm" data-show="profile" data-target="edit">✎ Edit Profile</button>
+        </div>
+        <div class="card-pad">
+          <div class="grid-2">
+            <div class="field"><label>Full name</label><div class="input" style="pointer-events:none;">Giovanna Schiraldi</div></div>
+            <div class="field"><label>Email</label><div class="input" style="pointer-events:none;">g.schiraldi@fiu.edu</div></div>
+            <div class="field"><label>Organization</label><div class="input" style="pointer-events:none;">Florida International University</div></div>
+            <div class="field"><label>Engineering discipline</label><div class="input" style="pointer-events:none;">Aerospace / Reliability</div></div>
+          </div>
+          <div class="field"><label>Password</label><div class="input" style="pointer-events:none;">•••••••••••• <span class="muted">(last changed 06/02/2026)</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: edit (pre-populated) ================= -->
+    <section data-screen="profile" data-name="edit">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Edit Profile</h2>
+            <div class="desc">Fields are pre-filled — change only what you need. Inline validation appears as you type.</div>
+          </div>
+          <span class="badge">Editing</span>
+        </div>
+        <div class="card-pad">
+          <div class="grid-2">
+            <div class="field">
+              <label>Full name <span class="req">*</span></label>
+              <input class="input is-ok" value="Giovanna Schiraldi" />
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input class="input is-ok" value="g.schiraldi@fiu.edu" />
+              <div class="ok-msg">✓ Available · format valid</div>
+            </div>
+            <div class="field">
+              <label>Organization <span class="req">*</span></label>
+              <input class="input" value="Florida International University" />
+            </div>
+            <div class="field">
+              <label>Engineering discipline <span class="req">*</span></label>
+              <select class="select">
+                <option>Aerospace / Reliability</option>
+                <option>Mechanical</option>
+                <option>Systems</option>
+                <option>Electrical</option>
+                <option>Software</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="spacer-12"></div>
+          <h2 style="font-size:14px;color:var(--ink-soft);margin:6px 0 14px;border-top:1px solid var(--line-soft);padding-top:18px;">Change password <span class="muted" style="font-weight:400;">(optional)</span></h2>
+          <div class="grid-2">
+            <div class="field">
+              <label>New password</label>
+              <div class="input-wrap">
+                <input class="input is-ok" type="password" value="Aero2026x" />
+                <span class="tip-btn" title="Password rules">?</span>
+              </div>
+              <div class="meter"><span style="width:80%;background:var(--ok);"></span></div>
+              <div class="meter-label" style="color:var(--ok);">Strong</div>
+            </div>
+            <div class="field">
+              <label>Confirm new password</label>
+              <input class="input is-ok" type="password" value="Aero2026x" />
+              <div class="ok-msg">✓ Passwords match</div>
+            </div>
+          </div>
+          <div class="tooltip">
+            <b>Password requirements</b>
+            <ul>
+              <li>Minimum 8 characters</li>
+              <li>At least 1 uppercase letter</li>
+              <li>At least 1 number</li>
+            </ul>
+            Changing your password will sign you out of all other active sessions.
+          </div>
+
+          <div class="spacer-20"></div>
+          <div class="row end">
+            <button class="btn btn-ghost" data-show="profile" data-target="view">Cancel</button>
+            <button class="btn btn-primary" data-show="profile" data-target="saved">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: validation errors / exceptions ================= -->
+    <section data-screen="profile" data-name="errors">
+      <div class="toast toast-err" style="margin-bottom:18px;">
+        <span class="ic">!</span> Please fix the highlighted fields before saving.
+      </div>
+      <div class="card">
+        <div class="card-head"><div><h2>Edit Profile</h2><div class="desc">Exception paths from the use case shown inline.</div></div><span class="badge">Editing</span></div>
+        <div class="card-pad">
+          <div class="grid-2">
+            <div class="field">
+              <label>Full name <span class="req">*</span></label>
+              <input class="input is-error" value="" placeholder="Required" />
+              <div class="err-msg">⚠ Full name is required.</div>
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input class="input is-error" value="r.moraes@fiu.edu" />
+              <div class="err-msg">⚠ This email is already in use.</div>
+            </div>
+            <div class="field">
+              <label>Organization <span class="req">*</span></label>
+              <input class="input" value="Florida International University" />
+            </div>
+            <div class="field">
+              <label>Engineering discipline <span class="req">*</span></label>
+              <select class="select"><option>Aerospace / Reliability</option></select>
+            </div>
+          </div>
+
+          <div class="spacer-12"></div>
+          <h2 style="font-size:14px;color:var(--ink-soft);margin:6px 0 14px;border-top:1px solid var(--line-soft);padding-top:18px;">Change password <span class="muted" style="font-weight:400;">(optional)</span></h2>
+          <div class="grid-2">
+            <div class="field">
+              <label>New password</label>
+              <input class="input is-error" type="password" value="aero" />
+              <div class="meter"><span style="width:25%;background:var(--danger);"></span></div>
+              <div class="meter-label" style="color:var(--danger);">Too weak — min 8 chars, 1 uppercase, 1 number</div>
+            </div>
+            <div class="field">
+              <label>Confirm new password</label>
+              <input class="input is-error" type="password" value="aero99" />
+              <div class="err-msg">⚠ Passwords do not match.</div>
+            </div>
+          </div>
+
+          <div class="spacer-20"></div>
+          <div class="row end">
+            <button class="btn btn-ghost" data-show="profile" data-target="view">Cancel</button>
+            <button class="btn btn-primary" data-show="profile" data-target="edit">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATE: success ================= -->
+    <section data-screen="profile" data-name="saved">
+      <div class="toast toast-ok" style="margin-bottom:18px;">
+        <span class="ic">✓</span> Profile updated successfully.
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><h2>Account Settings</h2><div class="desc">Changes persisted to the database · audit log updated.</div></div>
+          <button class="btn btn-primary btn-sm" data-show="profile" data-target="edit">✎ Edit Profile</button>
+        </div>
+        <div class="card-pad">
+          <div class="grid-2">
+            <div class="field"><label>Full name</label><div class="input" style="pointer-events:none;">Giovanna Schiraldi</div></div>
+            <div class="field"><label>Email</label><div class="input" style="pointer-events:none;">g.schiraldi@fiu.edu</div></div>
+            <div class="field"><label>Organization</label><div class="input" style="pointer-events:none;">Florida International University</div></div>
+            <div class="field"><label>Engineering discipline</label><div class="input" style="pointer-events:none;">Aerospace / Reliability</div></div>
+          </div>
+          <div class="field"><label>Password</label><div class="input" style="pointer-events:none;">•••••••••••• <span class="muted">(updated just now · other sessions signed out)</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="mock-footer">AeroRisk · SRD Appendix B — UI Mockups · UC-03 Update Profile · Owner: G. Schiraldi (CEN4010)</p>
+  </main>
+
+  <script src="assets/mock.js"></script>
+</body>
+</html>
